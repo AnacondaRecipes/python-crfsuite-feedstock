@@ -16,15 +16,13 @@ build:
     number: 0
     script:
         - python setup.py install --single-version-externally-managed --record record.txt
-    features:
-        - vc9   # [win and py27]
-        - vc14  # [win and py>=35]
 
 requirements:
     build:
+        - {{ compiler('cxx') }}
+    host:
         - python
         - setuptools
-        - toolchain
         - msinttypes  # [win and py27]
     run:
         - python
