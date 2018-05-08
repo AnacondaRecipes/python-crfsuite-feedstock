@@ -11,8 +11,6 @@ source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   {{ hashtype }}: {{ hash }}
-  patches:
-    - vc14-no-redefine-macro.patch  # [win]
 
 build:
     number: 0
