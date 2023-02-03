@@ -47,7 +47,7 @@ about:
   summary: Python binding for CRFsuite
   description: |
     python-crfsuite is a python binding to CRFsuite.
-  doc_url: https://python-crfsuite.readthedocs.io/en/latest/
+  doc_url: https://python-crfsuite.readthedocs.io/
   dev_url: https://github.com/scrapinghub/python-crfsuite
 
 extra:
