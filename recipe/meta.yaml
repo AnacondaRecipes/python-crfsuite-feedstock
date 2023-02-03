@@ -43,6 +43,8 @@ about:
   license_family: MIT
   license_file: LICENSE.txt
   summary: Python binding for CRFsuite
+  description: |
+    python-crfsuite is a python binding to CRFsuite.
   doc_url: https://python-crfsuite.readthedocs.io/en/latest/
   dev_url: https://github.com/scrapinghub/python-crfsuite
 
