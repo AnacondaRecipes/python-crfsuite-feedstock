@@ -29,9 +29,11 @@ requirements:
 test:
   requires:
     - pytest
+    - pip
   source_files:
     - tests
   commands:
+    - pip check
     - pytest -v tests  # [not ppc64le]
     - pytest -v tests -k "not (test_training_messages_exception)"  # [ppc64le]
     - conda inspect linkages {{ name }}  # [unix]
