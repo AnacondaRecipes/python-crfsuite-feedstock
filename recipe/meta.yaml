@@ -9,8 +9,6 @@ package:
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
-  patches:
-    - py310.patch
 
 build:
   number: 1
@@ -22,8 +20,6 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - msinttypes  # [win and py27]
-    - patch       # [not win]
-    - m2-patch    # [win]
   host:
     - python
     - pip
