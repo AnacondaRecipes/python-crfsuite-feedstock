@@ -1,6 +1,6 @@
 {% set name = "python-crfsuite" %}
-{% set version = "0.9.7" %}
-{% set sha256 = "3b4538d2ce5007e4e42005818247bf43ade89ef08a66d158462e2f7c5d63cee7" %}
+{% set version = "0.9.9" %}
+{% set sha256 = "caa6261d6955466756f986b7fcfbd4fd50622963e3bdb5cc180c129c62b3a76d" %}
 
 package:
   name: {{ name|lower }}
@@ -9,21 +9,15 @@ package:
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
-  patches:
-    - py310.patch
 
 build:
-  number: 1
-  # trigger 1
+  number: 0
   script: {{ PYTHON }} -m pip install . --no-deps -vv
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - msinttypes  # [win and py27]
-    - patch       # [not win]
-    - m2-patch    # [win]
   host:
     - python
     - pip
@@ -35,9 +29,12 @@ requirements:
 test:
   requires:
     - pytest
+    - pip
+    - conda-build
   source_files:
     - tests
   commands:
+    - pip check
     - pytest -v tests  # [not ppc64le]
     - pytest -v tests -k "not (test_training_messages_exception)"  # [ppc64le]
     - conda inspect linkages {{ name }}  # [unix]
@@ -49,7 +46,9 @@ about:
   license_family: MIT
   license_file: LICENSE.txt
   summary: Python binding for CRFsuite
-  doc_url: https://python-crfsuite.readthedocs.io/en/latest/
+  description: |
+    python-crfsuite is a python binding to CRFsuite.
+  doc_url: https://python-crfsuite.readthedocs.io/
   dev_url: https://github.com/scrapinghub/python-crfsuite
 
 extra:
