@@ -31,7 +31,6 @@ test:
   requires:
     - pytest
     - pip
-    - conda-build
   source_files:
     - tests
   imports:
