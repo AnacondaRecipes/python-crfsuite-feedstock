@@ -1,18 +1,18 @@
 {% set name = "python-crfsuite" %}
-{% set version = "0.9.9" %}
-{% set sha256 = "caa6261d6955466756f986b7fcfbd4fd50622963e3bdb5cc180c129c62b3a76d" %}
+{% set version = "0.9.11" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name|replace('-', '_') }}-{{ version }}.tar.gz
+  sha256: 6eff965ca70567396d822c9a35ea74b0f7edb27d9471524997bdabe7a6da5f5a
 
 build:
-  number: 0
-  script: {{ PYTHON }} -m pip install . --no-deps -vv
+  number: 1
+  script: {{ PYTHON }} -m pip install . --no-deps -vv --no-build-isolation
+  skip: True  # [py<38]
 
 requirements:
   build:
@@ -21,8 +21,9 @@ requirements:
   host:
     - python
     - pip
-    - setuptools
+    - setuptools >=42
     - wheel
+    - cython
   run:
     - python
 
@@ -33,6 +34,9 @@ test:
     - conda-build
   source_files:
     - tests
+  imports:
+    - pycrfsuite
+    - pycrfsuite._logparser
   commands:
     - pip check
     - pytest -v tests  # [not ppc64le]
@@ -48,7 +52,7 @@ about:
   summary: Python binding for CRFsuite
   description: |
     python-crfsuite is a python binding to CRFsuite.
-  doc_url: https://python-crfsuite.readthedocs.io/
+  doc_url: https://python-crfsuite.readthedocs.io
   dev_url: https://github.com/scrapinghub/python-crfsuite
 
 extra:
